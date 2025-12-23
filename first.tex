@@ -1615,9 +1615,9 @@ x + 2y + 3z = 9 \\
 
 \bigskip
 
-The past 5 methods are called numerical methods to solve a system of linear equations
+\noindent The past 5 methods are called numerical methods to solve a system of linear equations
 
-\paragraph{Direct Methods}: this methods are called iterative methods
+\paragraph{Direct Methods:} this methods are called iterative methods
 
 \begin{enumerate}
   \item \textbf{Jacobi Method} \par
@@ -1637,17 +1637,16 @@ The past 5 methods are called numerical methods to solve a system of linear equa
 
     \newpage
 
-    Where $i = 1$
-    \[x_i^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - \sum_{i \neq j}^{3}a_{ij}  x_j^k\big)\]
+    Where $i = 1$ so $j = 2, 3$ because $j \neq i$
     \[x_1^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - \big[a_{12}x_2^k + a_{13}x_3^k\big]\big)\]
 
     \bigskip
-    $i = 2$
+    $i = 2$ ,  $j = 1, 3$ 
     \[x_2^{(k+1)} = \frac{1}{a_{22}}\big(b_2 - \big[a_{21}x_1^k + a_{23}x_3^k\big]\big)\]
 
     \bigskip
-    $i = 3$
-    \[x_3^{(k+1)} = \frac{1}{a_{33}}\big(b_3 - \big[a_{31}x_1^k + a_{32}x_3^k\big]\big)\]
+    $i = 3$ , $j = 1, 2$ 
+    \[x_3^{(k+1)} = \frac{1}{a_{33}}\big(b_3 - \big[a_{31}x_1^k + a_{32}x_2^k\big]\big)\]
 
     Method Steps
     \begin{enumerate}
@@ -1677,9 +1676,10 @@ The past 5 methods are called numerical methods to solve a system of linear equa
         15
       \end{bmatrix}
     \]
-    \[x_1^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - a_{12}x_2^k - a_{13}x_3^k\big)\]
-    \[x_2^{(k+1)} = \frac{1}{a_{22}}\big(b_2 - a_{21}x_1^k - a_{23}x_3^k\big)\]
-    \[x_3^{(k+1)} = \frac{1}{a_{33}}\big(b_3 - a_{31}x_1^k - a_{32}x_2^k\big)\]
+    
+    \[x_1^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - \big[a_{12}x_2^k + a_{13}x_3^k\big]\big)\]
+    \[x_2^{(k+1)} = \frac{1}{a_{22}}\big(b_2 - \big[a_{21}x_1^k + a_{23}x_3^k\big]\big)\]
+    \[x_3^{(k+1)} = \frac{1}{a_{33}}\big(b_3 - \big[a_{31}x_1^k + a_{32}x_2^k\big]\big)\]
     
     \newpage
     \[x_1^{(k+1)} = \frac{1}{10}\big(9 - 2x_2^k - x_3^k\big)\]
