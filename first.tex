@@ -1613,4 +1613,675 @@ x + 2y + 3z = 9 \\
   \]
 \end{enumerate}
 
+\bigskip
+
+The past 5 methods are called numerical methods to solve a system of linear equations
+
+\paragraph{Direct Methods}: this methods are called iterative methods
+
+\begin{enumerate}
+  \item \textbf{Jacobi Method} \par
+    Generale form:
+    \[
+      x_{i}^{(k+1)} = \frac{1}{a_{ii}}\big(b_i - \sum_{i \neq j}^{n} a_{ij}  x_j^k\big)
+    \]
+    used to solve $AX = b$, Where
+
+    $A$: square matrix
+
+    $X$: Vector of unknowns 
+
+    $b$: Vector of knowns
+
+    $k$: is a counter starts from $0$
+
+    \newpage
+
+    Where $i = 1$
+    \[x_i^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - \sum_{i \neq j}^{3}a_{ij}  x_j^k\big)\]
+    \[x_1^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - \big[a_{12}x_2^k + a_{13}x_3^k\big]\big)\]
+
+    \bigskip
+    $i = 2$
+    \[x_2^{(k+1)} = \frac{1}{a_{22}}\big(b_2 - \big[a_{21}x_1^k + a_{23}x_3^k\big]\big)\]
+
+    \bigskip
+    $i = 3$
+    \[x_3^{(k+1)} = \frac{1}{a_{33}}\big(b_3 - \big[a_{31}x_1^k + a_{32}x_3^k\big]\big)\]
+
+    Method Steps
+    \begin{enumerate}
+      \item Start with initial values:  $x^0 = \big[x_1^0, x_2^0, \dots, x_n^0\big]$
+      \item Compute new values $x_i$: $x_i^{(k+1)} = \big(x_1^{k+1}, x_2^{k+1}, \dots, x_n^{k+1}\big)$
+      \item Repeat until the values converge between iterations, This mean \par
+      \[\left|x_i^{(k+1)} - x_i^k\right| < \epsilon\]
+    \end{enumerate}
+    \paragraph{Ex:} solve the following equations
+    \[
+      \begin{aligned}
+        10x_1 + 2x_2 + x_3 = 9 \\
+        x_1 + 5x_2 + x_3 = 7 \\
+        2x_1 + 3x_2 + 10x_3 = 15
+      \end{aligned}
+    \]
+    \textbf{Sol:}
+    \[
+      A = \begin{bmatrix}
+        10 & 2 & 1 \\
+        1 & 5 & 1 \\
+        2 & 3 & 10 
+      \end{bmatrix}, \quad
+      b = \begin{bmatrix}
+        9 \\
+        7 \\
+        15
+      \end{bmatrix}
+    \]
+    \[x_1^{(k+1)} = \frac{1}{a_{11}}\big(b_1 - a_{12}x_2^k - a_{13}x_3^k\big)\]
+    \[x_2^{(k+1)} = \frac{1}{a_{22}}\big(b_2 - a_{21}x_1^k - a_{23}x_3^k\big)\]
+    \[x_3^{(k+1)} = \frac{1}{a_{33}}\big(b_3 - a_{31}x_1^k - a_{32}x_2^k\big)\]
+    
+    \newpage
+    \[x_1^{(k+1)} = \frac{1}{10}\big(9 - 2x_2^k - x_3^k\big)\]
+    \[x_2^{(k+1)} = \frac{1}{5}\big(7 - x_1^k - x_3^k\big)\]
+    \[x_3^{(k+1)} = \frac{1}{10}\big(15 - 2x_1^k - 3x_2^k\big)\]
+    
+    \bigskip
+    
+    \[
+      k = 0 \Rightarrow \big(
+        x_1^0 = 0,\quad x_2^0 = 0,\quad x_3^0 = 0
+      \big)
+    \]
+    
+    \bigskip
+    \[
+      x_1^1 = \frac{1}{10}\big(9 - 2x_2^0 - x_3^0\big) \Rightarrow
+      x_1^1 = \frac{1}{10}\big(9 - 2 \times 0 - 0\big) \Rightarrow 
+      x_1^1 = \frac{9}{10} = 0.9
+    \]
+
+    \[
+      x_2^{1} = \frac{1}{5}\big(7 - x_1^0 - x_3^0\big) \Rightarrow
+      x_2^{1} = \frac{1}{5}\big(7 - 0 - 0\big) \Rightarrow 
+      x_2^1 = \frac{7}{5} = 1.4
+    \]
+
+    \[
+      x_3^1 = \frac{1}{10}\big(15 - 2x_1^0 - 3x_2^0\big) \Rightarrow
+      x_3^{1} = \frac{1}{10}\big(15 - 2 \times 0 - 3 \times 0\big) \Rightarrow 
+      x_3^1 = \frac{15}{10} = 1.5
+    \]
+
+    \[
+      \left| x_1^1 - x_1^0  \right| \Rightarrow
+      \left| 0.9 - 0 \right| = 0.9 > \epsilon
+    \]
+
+    \bigskip
+
+    \[
+      k = 1 \Rightarrow  \big(
+        x_1^1 = 0.9,\quad 
+        x_2^1 = 1.4,\quad 
+        x_3^1 = 1.5
+      \big)
+    \]
+
+    \[
+      x_1^2 = \frac{1}{10}\big(9 - 2x_2^1 - x_3^1\big) \Rightarrow
+      x_1^2 = \frac{1}{10}\big(9 - 2 \times 1.4 - 1.5\big) \Rightarrow 
+      x_1^2 = 0.47
+    \]
+
+    \[
+      x_2^2 = \frac{1}{5}\big(7 - x_1^1 - x_3^1\big) \Rightarrow
+      x_2^2 = \frac{1}{5}\big(7 - 0.9 - 1.5\big) \Rightarrow 
+      x_2^2 = 0.92
+    \]
+
+    \[
+      x_3^2 = \frac{1}{10}\big(15 - 2x_1^1 - 3x_2^1\big) \Rightarrow
+      x_3^2 = \frac{1}{10}\big(15 - 2 \times 0.9 - 3 \times 1.4\big) \Rightarrow 
+      x_3^2 = 0.9
+    \]
+
+    \[
+      \left| x_1^2 - x_1^1  \right| \Rightarrow
+      \left| 0.47 - 0.9 \right| = 0.43 > \epsilon
+    \]
+
+    \newpage
+
+    \[
+      k = 2 \Rightarrow  \big(
+        x_1^2 = 0.47,\quad 
+        x_2^2 = 0.92,\quad 
+        x_3^2 = 0.9
+      \big)
+    \]
+
+    \[
+      x_1^3 = \frac{1}{10}\big(9 - 2x_2^2 - x_3^2\big) \Rightarrow
+      x_1^3 = \frac{1}{10}\big(9 - 2 \times 0.92 - 0.9\big) \Rightarrow 
+      x_1^3 = 0.626
+    \]
+
+    \[
+      x_2^3 = \frac{1}{5}\big(7 - x_1^2 - x_3^2\big) \Rightarrow
+      x_2^3 = \frac{1}{5}\big(7 - 0.47 - 0.9\big) \Rightarrow 
+      x_2^3 = 1.126
+    \]
+
+    \[
+      x_3^3 = \frac{1}{10}\big(15 - 2x_1^2 - 3x_2^2\big) \Rightarrow
+      x_3^3 = \frac{1}{10}\big(15 - 2 \times 0.47 - 3 \times 0.92\big) \Rightarrow 
+      x_3^3 = 1.13
+    \]
+
+    \[
+      \left| x_1^3 - x_1^2 \right| \Rightarrow
+      \left| 0.626 - 0.47 \right| = 0.156 < \epsilon
+    \]
+
+    \[
+      \left| x_2^3 - x_2^2 \right| \Rightarrow
+      \left| 1.126 - 0.92 \right| = 0.206 < \epsilon
+    \]
+
+    \[
+      \left| x_3^3 - x_3^2 \right| \Rightarrow
+      \left| 1.13 - 0.9 \right| = 0.23 < \epsilon
+    \]
+
+    So the solution set: $x_1^3 = 0.626, \quad x_2^3 = 1.126, \quad x_3^3 = 1.13$
+
+    \bigskip
+    
+    \item \textbf{Gauss-Seidal Iteration Formula} \par
+    Suppose you have a system of 3 equations
+    \begin{enumerate}
+      \item $a_{11} x_1 + a_{12} x_1 + a_{13} x_1 = b_1$
+      \item $a_{21} x_2 + a_{22} x_2 + a_{23} x_2 = b_2$
+      \item $a_{31} x_3 + a_{32} x_3 + a_{33} x_3 = b_3$
+    \end{enumerate}
+    To solve this system, use this form which is refers to the general form
+    \[
+      x_i^{(k+1)} = 
+      \frac{1}{a_{ii}} \big( b_i - \sum_{j=1}^{i-1} a_{ij}x_j^{(k+1)} - \sum_{j = i + 1}^{n} a_{ij}x_j^k \big)
+    \]
+    Where: \par
+    $i: 1, 2, 3, \dots $ \par
+    $k: 0, 1, 2, \dots $ \par
+    $n:$ number of equations
+
+    It can be written as the following \par
+
+    $i = 1$
+    \[x_1^{(k+1)} = \frac{1}{a_{11}} \big( b_1 - a_{12}x_2^{(k)} - a_{13}x_3^{(k)} \big)\]
+
+    $i = 2$
+    \[x_2^{(k+1)} = \frac{1}{a_{22}} \big( b_2 - a_{21}x_1^{(k+1)} - a_{23}x_3^{(k)} \big)\]
+
+    $i = 3$
+    \[x_3^{(k+1)} = \frac{1}{a_{33}} \big( b_3 - a_{31}x_1^{(k+1)} - a_{32}x_2^{(k+1)} \big)\]
+
+    \newpage
+
+    Method Steps
+    \begin{enumerate}
+      \item Choose initial values $(x_1^{(0)}, x_2^{(0)}, x_3^{(0)})$
+      \item Apply the iteration using the Formula
+      \item Check if $ max\big(\left|x_i^{(k+1)} - x_i^{(k)}\right|\big) < \epsilon$
+    \end{enumerate}
+    \textbf{Ex:} \par
+    $ 4x_1 - x_2 + x_3 = 7 $  \par
+    $ -2x_1 + 5x_2 - x_3 = -8 $ \par
+    $ x_1 + x_2 + 3x_3 = 6 $ \par
+    $ x_1^{(0)} = 0, x_2^{(0)} = 0, x_3^{(0)} = 0 $ \par 
+    $ \epsilon = 0.01 $ \par
+    \textbf{Sol:} \par
+    \[
+      \begin{bmatrix}
+        4 & -1 & 1 \\
+        -2 & 5 & -1 \\
+        1 & 1 & 3 \\
+      \end{bmatrix} \quad
+      \begin{bmatrix}
+        x_1 \\ x_2 \\ x_3
+      \end{bmatrix} \quad
+      \begin{bmatrix}
+        7 \\ -8 \\ 6
+      \end{bmatrix}
+    \]
+    \[
+      x_i^{(k+1)} = 
+      \frac{1}{a_{ii}} \big( b_i - \sum_{j=1}^{i-1} a_{ij}x_j^{(k+1)} - \sum_{j = i + 1}^{n} a_{ij}x_j^k \big)
+    \]
+    $ k = 0 $ \\ 
+    $ i = 1 $
+    \[ x_1^{(1)} = \frac{1}{a_{11}} \big( b_1 - a_{12}x_2^{(0)} - a_{13}x_3^{(0)} \big) \]
+    \[
+      x_1^{(1)} = \frac{1}{4} \big(7 - (-1 \times 0) - (1 \times 0) \big)  = \frac{7}{4} \Rightarrow 
+      x_1^{(1)} = 1.75
+    \]
+
+    \bigskip
+    $ i = 2 $
+    \[ x_2^{(1)} = \frac{1}{a_{22}} \big( b_2 - a_{21}x_1^{(1)} - a_{23}x_3^{(0)} \big) \]
+    \[
+      x_2^{(1)} = \frac{1}{5} \big(-8 - (-2 \times 1.75)  - (-1 \times 0) \big)  = -\frac{9}{10} \Rightarrow 
+      x_2^{(1)} = -0.9
+    \]
+
+    \bigskip
+    $ i = 3 $
+    \[ x_3^{(1)} = \frac{1}{a_{33}} \big( b_3 - a_{31}x_1^{(1)} - a_{32}x_2^{(1)} \big) \]
+    \[
+      x_3^{(1)} = \frac{1}{3} \big(6 - (1 \times 1.75) - (1 \times -0.9) \big)  = \frac{5.15}{3} \Rightarrow 
+      x_3^{(1)} = 1.71
+    \]
+
+    \[x_1^{(1)} = 1.75, x_2^{(1)} = -0.9, x_3^{(1)} = 1.71\]
+    \[
+      \left| x_1^{(1)} - x_1^{(0)} \right| = \left|1.75 - 0\right| = 1.75 > \epsilon
+    \]
+    \newpage  
+
+    $k = 1$ \\
+    $i = 1$
+    \[ x_1^{(2)} = \frac{1}{a_{11}} \big( b_1 - a_{12}x_2^{(1)} - a_{13}x_3^{(1)} \big) \]
+    \[
+      x_1^{(2)} = \frac{1}{4} \big( 7 - (-1 \times -0.9) - (1 \times 1.71) \big) \Rightarrow
+      x_1^{(2)} = 1.0975
+    \]
+
+    $i = 2$
+    \[x_2^{(2)} = \frac{1}{a_{22}} \big( b_2 - a_{21}x_1^{(2)} - a_{23}x_3^{(1)} \big)\]
+    \[
+      x_2^{(2)} = \frac{1}{5} \big( -8 - (-2 \times 1.0975) - (-1 \times 1.71) \big) \Rightarrow
+      x_2^{(2)} = -0.819
+    \]
+
+    $i = 3$
+    \[x_3^{(2)} = \frac{1}{a_{33}} \big( b_3 - a_{31}x_1^{(2)} - a_{32}x_2^{(2)} \big)\]
+    \[
+      x_3^{(2)} = \frac{1}{3} \big( 6 - (1 \times 1.0975) - (1 \times -0.819) \big) \Rightarrow
+      x_3^{(2)} = 1.9071
+    \]
+    
+    \[ x_1^{(2)} = 1.0975, x_2^{(2)} = -0.819, x_3^{(2)} = 1.9071 \]
+
+    \[
+      \left|x_1^{(2)} - x_1^{(1)}\right| = \left|1.0975 - 1.75\right| = 0.6525 > \epsilon
+    \]
+
+    $k = 2$ \\
+    $i = 1$
+    \[ x_1^{(3)} = \frac{1}{a_{11}} \big( b_1 - a_{12}x_2^{(2)} - a_{13}x_3^{(2)} \big) \]
+    \[ 
+      x_1^{(3)} = \frac{1}{4} \big( 7 - (-1 \times -0.819) - (1 \times 1.9071) \big) \Rightarrow
+      x_1^{(3)} = 1.0684
+    \]
+      
+    $i = 2$
+    \[x_2^{(3)} = \frac{1}{a_{22}} \big( b_2 - a_{21}x_1^{(3)} - a_{23}x_3^{(2)} \big)\]
+    \[
+      x_2^{(3)} = \frac{1}{5} \big( -8 - (-2 \times 1.0684) - (-1 \times 1.9071) \big) \Rightarrow
+      x_2^{(3)} = -0.79122
+    \]
+      
+    $i = 3$
+    \[x_3^{(3)} = \frac{1}{a_{33}} \big( b_3 - a_{31}x_1^{(3)} - a_{32}x_2^{(3)} \big)\]
+    \[
+      x_3^{(3)} = \frac{1}{3} \big( 6 - (1 \times 1.0684) - (1 \times -0.79122) \big) \Rightarrow
+      x_3^{(3)} = 1.9076
+    \]
+    
+    \[ x_1^{(3)} = 1.0684, x_2^{(3)} = -0.79122, x_3^{(3)} = 1.9076 \]
+
+    \[
+      \left|x_1^{(3)} - x_1^{(2)}\right| = \left|1.0684 - 1.0975\right| = 0.0291 > \epsilon
+    \]
+    \newpage
+
+    $k = 3$ \\
+    $i = 1$
+    \[ x_1^{(4)} = \frac{1}{a_{11}} \big( b_1 - a_{12}x_2^{(3)} - a_{13}x_3^{(3)} \big) \]
+    \[ 
+      x_1^{(4)} = \frac{1}{4} \big( 7 - (-1 \times -0.79122) - (1 \times 1.9076) \big) \Rightarrow
+      x_1^{(4)} = 1.0752
+    \]
+
+    $i = 2$
+    \[x_2^{(4)} = \frac{1}{a_{22}} \big( b_2 - a_{21}x_1^{(4)} - a_{23}x_3^{(3)} \big)\]
+    \[
+      x_2^{(4)} = \frac{1}{5} \big( -8 - (-2 \times 1.0752) - (-1 \times 1.9076) \big) \Rightarrow
+      x_2^{(4)} = -0.7884
+    \]
+
+    $i = 3$
+    \[x_3^{(4)} = \frac{1}{a_{33}} \big( b_3 - a_{31}x_1^{(4)} - a_{32}x_2^{(4)} \big)\]
+    \[
+      x_3^{(4)} = \frac{1}{3} \big( 6 - (1 \times 1.0752) - (1 \times -0.7884) \big) \Rightarrow
+      x_3^{(4)} = 1.9044
+    \]
+
+    \[ x_1^{(4)} = 1.0752, x_2^{(4)} = -0.7884, x_3^{(4)} = 1.9044 \]
+
+    \[
+      \left|x_1^{(4)} - x_1^{(3)}\right| = \left|1.0752 - 1.0684\right| = 0.0068 < \epsilon
+    \]
+
+    \[
+      \left|x_2^{(4)} - x_2^{(3)}\right| = \left|-0.7884 - (-0.79122)\right| = 0.00282 < \epsilon
+    \]
+
+    \[
+      \left|x_3^{(4)} - x_3^{(3)}\right| = \left|1.9044 - 1.9076\right| = 0.0032 < \epsilon
+    \]
+
+    So the solution set is: $x_1^{(4)} = 1.0752, x_2^{(4)} = -0.7884, x_3^{(4)} = 1.9044$
+
+  \item textbf{Newton-Raphson method} \par
+    The general form of the method is \par
+    \[ x_(n+1) = x_n - \frac{f(x_n)}{f'(x_n)} \]
+    Where: \par
+    $n = 0, 1, ,2, 3, \dots$ \par
+    $f(x) = 0$ at  $[a, b]$ \par
+    $x_0$: Defined the value $x_(n+1)$ is a root of the function $f(x) = 0$ if and only if it satisfies the following \par  
+    $ \left| x_(n+1) - x_n \right| \leq \epsilon $ , Where $\epsilon$ is a small value
+    \newpage
+    \paragraph{Remark:} If $x_0$ is not defined it can be calculated using the formula Below 
+
+    $ x_0 = \frac{a + b}{2} $
+
+    \textbf{EX:} using Newton-Raphson method to find the root of the following function within $[0, 1]$ \par
+    $x_0 = 0, x = e^{-x}, \epsilon = 0.005$
+
+    \textbf{Sol:}
+
+    \[
+      f(x) = 0, x = e^{-x}
+      \xrightarrow{\text{move } e^{-x}}
+      f(x) = x - e^{-x}
+    \]
+    Now find derivative of $f(x)$
+    \[ f'(x) = 1 + e^{-x} \]
+    \[ x_(n+1) = x_n - \frac{f(x_n)}{f'(x_n)} \]
+    
+    $n = 0$
+    \[x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}\]
+    \[ 
+      x_1 = 0 - \frac{f(0)}{f'(0)} \Rightarrow
+      x_1 = 0 - \frac{0 - e^0}{1 + e^0} \Rightarrow
+      x_1 = \frac{1}{2}  = 0.5
+    \]
+    \[
+      \left| x_{n+1} - x_n \right| \Rightarrow
+      \left| x_1 - x_0 \right| \Rightarrow
+      \left| 0.5 - 0 \right| = 0.5 > \epsilon
+    \]
+
+    $n = 1$
+    \[ x_2 = x_1 - \frac{f(x_1)}{f'(x_1)} \]
+    \[ 
+      x_2 = 0.5 - \frac{f(0.5)}{f'(0.5)} \Rightarrow
+      x_2 = 0.5 - \frac{0.5 - e^{-0.5}}{1 + e^{-0.5}} \Rightarrow
+      x_2 = 0.566
+    \]
+    \[
+      \left| x_2 - x_1 \right| \Rightarrow
+      \left| 0.566 - 0.5 \right| = 0.066 > \epsilon
+    \]
+
+    $n = 2$
+    \[ x_3 = x_2 - \frac{f(x_2)}{f'(x_2)} \]
+    \[ 
+      x_3 = 0.566 - \frac{f(0.566)}{f'(0.566)} \Rightarrow
+      x_3 = 0.566 - \frac{0.566 - e^{-0.566}}{1 + e^{-0.566}} \Rightarrow
+      x_3 = 0.567
+    \]
+    \[
+      \left| x_3 - x_2 \right| \Rightarrow
+      \left| 0.567 - 0.566 \right| = 0.001 < \epsilon
+    \]
+    $ x_3 = 0.567 $ is the root of $f(x) = x - e^{-x}$
+
+    \newpage
+
+    \textbf{Newton's} method to find the $n_{th}$ roots
+    To find $\sqrt{B}$ , we can follow the function below \par
+    \begin{enumerate}
+      \item $x = \sqrt{B} \Rightarrow x^2 = B \Rightarrow x^2 - B = 0 \Rightarrow \fbox{$f(x) = x^2 - B$}$
+      \item Now $x = \pm \sqrt{B}$
+      \item $f'(x) = 2x$
+      \item $x = g(x) = x - \frac{f(x)}{f'(x)} \Rightarrow x - \frac{x^2 - B}{2x} = \frac{x^2 + B}{2x} \Rightarrow \frac{x + \frac{B}{x}}{2} $
+      \item Now we can use the formula: $r_{(n+1)} = \frac{r_n + \frac{B}{r_n}}{2}$
+    \end{enumerate}
+
+    \textbf{EX:} Find $\sqrt{3}$ with $r_0 = 1$ \par
+
+    \textbf{Sol:} 
+    \[ r_{(n+1)} = \frac{r_n + \frac{B}{r_n}}{2}, \quad B = 3 \]
+
+    $n = 0$
+    \[ r_{1} = \frac{r_0 + \frac{B}{r_0}}{2} \]
+    \[ 
+      r_{1} = \frac{1 + \frac{3}{1}}{2} \Rightarrow r_1 = \frac{4}{2} \Rightarrow r_1 = 2
+    \]
+
+    $n = 1$
+    \[ r_{2} = \frac{r_1 + \frac{B}{r_1}}{2} \]
+    \[ 
+      r_{2} = \frac{2 + \frac{3}{2}}{2} \Rightarrow r_2 = \frac{7}{4} \Rightarrow r_2 = 1.75
+    \]
+
+    $n = 2$
+    \[ r_{3} = \frac{r_2 + \frac{B}{r_2}}{2} \]
+    \[ 
+      r_{3} = \frac{1.75 + \frac{3}{1.75}}{2} \Rightarrow r_3 = \frac{97}{56} \Rightarrow r_3 = 1.732142857
+    \]
+
+    $n = 3$
+    \[ r_{4} = \frac{r_3 + \frac{B}{r_3}}{2} \]
+    \[ 
+      r_{4} = \frac{1.732142857 + \frac{3}{1.732142857}}{2} \Rightarrow r_4 = 1.73205
+    \]
+
+    $n = 4$
+    \[ r_{5} = \frac{r_4 + \frac{B}{r_4}}{2} \]
+    \[ 
+      r_{5} = \frac{1.73205 + \frac{3}{1.73205}}{2} \Rightarrow r_5 = 1.73205
+    \]
+    \newpage
+    We will stop if our last two results matches 
+    \begin{center}
+      \begin{tabular}{ |c|c| } 
+        \hline
+        $n$ & $r_{n+1}$ \\ 
+        \hline
+        0 & 2 \\ \hline
+        1 & 1.75 \\ \hline
+        2 & 1.732142857 \\ \hline
+        3 & 1.73205 \\ \hline
+        4 & 1.73205 \\ \hline
+      \end{tabular}
+    \end{center}
+    \bigskip
+
+    \item \textbf{Fixed point method} \par
+    To find the root of an equation using this method, we can follow the following steps: \par
+    \noindent\begin{enumerate}
+      \item Putting the function $f(x)$ in the form of $x = g(x)$
+      \item Make sure $ \left| g'(x_0) \right| < 1 $ , If not we need to chose another form of the $g(x)$
+      \item Find $x_{n+1}$ , using the formula $x_{n+1} = g(x_n), \quad n = 0, 1, 2, \dots$
+      \item The value $x_{x+1}$ is a root of the function $f(x) = 0$ if and only if $ \left| x_{n+1} - x_n \right| \leq \epsilon $ , Where $\epsilon$ is a small value
+    \end{enumerate}
+
+    \textbf{EX:} Use fixed point method to find the root of $f(x) = x^2 - x - 3 = 0$ within $[1, 2]$ and $\epsilon = 0.01$ \par
+    \textbf{Sol:}
+
+    \[ x_0 = \frac{a+b}{2} \Rightarrow x_0 = \frac{1 + 2}{2} \Rightarrow x_0 = \frac{3}{2} \Rightarrow x_0 = 1.5 \]
+    \[f(x) = x^2 - x - 3 = 0\]
+    \[ x^2 - x - 3 = 0 \xrightarrow{\text{move } x } x = x^2 - 3 \]
+    \[x = g(x), \quad g'(x) = 2x\]
+    \[\left| g'(x_0) \right| \Rightarrow \left| g'(1.5) \right| \Rightarrow \left| 2 \times 1.5 \right| = 3 > 1 \]
+    
+    We need to find another form of $g(x)$
+    \[x^2 - x - 3 = 0 \Rightarrow x^2 = x + 3 \Rightarrow x = \sqrt{x+3} = g(x) \]
+    \[g'(x) = \frac{1}{2 \sqrt{x+3}}\]
+    \[\left| g'(x_0) \right| \Rightarrow  \left| \frac{1}{2 \sqrt{1.5 + 3}} \right|  = 0.23 < 1\]
+
+    \newpage
+
+    \[x_{n+1} = g(x_n)\]
+    
+    $n = 0$
+    \[x_1 = g(x_0)\]
+    \[x_1 = g(1.5) = \sqrt{1.5+3} = \sqrt{4.5} = 2.12 \Rightarrow x_1 = 2.12\]
+    \[ |x_1 - x_0| = |2.12 - 1.5| = 0.62 > \epsilon \]
+    
+    $n = 1$
+    \[x_2 = g(x_1)\]
+    \[x_2 = g(2.12) = \sqrt{2.12+3} = \sqrt{5.12} = 2.26 \Rightarrow x_2 = 2.26\]
+    \[ |x_2 - x_1| = |2.26 - 2.12| = 0.14 > \epsilon \]
+    
+    $n = 2$
+    \[x_3 = g(x_2)\]
+    \[x_3 = g(2.26) = \sqrt{2.26+3} = \sqrt{5.26} = 2.29 \Rightarrow x_3 = 2.29\]
+    \[ |x_3 - x_2| = |2.29 - 2.26| = 0.03 > \epsilon \]
+    
+    $n = 3$
+    \[x_4 = g(x_3)\]
+    \[x_4 = g(2.29) = \sqrt{2.29+3} = \sqrt{5.29} = 2.3 \Rightarrow x_4 = 2.3\]
+    \[ |x_4 - x_2| = |2.3 - 2.29| = 0.01 = \epsilon \]
+
+    So $x_4 = 2.3$ is the root of $f(x)$
+  \end{enumerate}
+  \newpage
+
+  \paragraph{Interpolation theory:} Used to find the missing data (values) of the existing data based on the relationships between the data (values)
+  \paragraph{Lagrang interpolation method:} In a series of x-values, This method can be used to find the value of $f(x)$ , this is one of the simplest numerical methods that can be show by the following data
+
+  \bigskip
+  
+  \noindent
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $x$ & $x_0$ & $x_1$ & $\dots$ & $x_n$ \\ \hline
+    $f(x)$ & $f(x_0)$ & $f(x_1)$ & $\dots$ & $f(x_n)$ \\ \hline
+  \end{tabular}
+
+  \bigskip 
+
+  \noindent
+  The Lagrang method for the above data will be \par
+  \[ f(x^*) = f(x_0)L_0x^* + f(x_1)L_1x^* + f(x_2)L_2x^* \] \par
+
+  \noindent Where: \par
+  
+  \noindent $x^*$: The value we want to find \par
+  \medskip
+  \noindent $L_ix^* = \frac{ (x^* - x_1) (x^* - x_2) }{ (x_0 - x_1) (x_0 - x_2) } \times \frac{ (x^* - x_0) (x^* - x_2) }{ (x_1 - x_0) (x_1 - x_2) } \times \frac{ (x^* - x_0) (x^* - x_1) }{ (x_2 - x_0) (x_2 - x_1) } $ \par
+  \medskip
+  \noindent So the general form is \par
+  \[
+    f(x^*) = \sum_{j = 0}^{n} f(x_j) \prod_{\substack{i = 0 \\ i \neq j}}^{n} \frac{x^* - x_i}{x_j - x_i}
+  \]
+
+  \paragraph{EX:} By Lagrang formula, find $f(3)$ and $f(5)$ using the following set \par
+  
+  \noindent
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $x$ & $0$ & $1$ & 2 & 4 \\ \hline
+    $f(x)$ & $1$ & $1$ & $2$ & $5$ \\ \hline
+  \end{tabular}
+
+  \medskip
+
+  \noindent
+  \textbf{Sol}
+  \[
+    f(x^*) = \sum_{j = 0}^{n} f(x_j) \prod_{\substack{i = 0 \\ i \neq j}}^{n} \frac{x^* - x_i}{x_j - x_i}
+  \]
+
+  $n = 3$ because we have $4$ values in the table
+
+  \[
+    \begin{aligned}
+      f(x^*) = & f(x_0) \frac{(x^* - x_1) (x^* - x_2) (x^* - x_3)}{(x_0 - x_1) (x_0 - x_2) (x_0 - x_3)}  & j & = 0 , i = 1, 2, 3 \\
+              + &  f(x_1) \frac{(x^* - x_0) (x^* - x_2) (x^* - x_3)}{(x_1 - x_0) (x_1 - x_2) (x_1 - x_3)}  & j & = 1 , i = 0, 2, 3 \\
+              + &  f(x_2) \frac{(x^* - x_0) (x^* - x_1) (x^* - x_3)}{(x_2 - x_0) (x_2 - x_1) (x_2 - x_3)}  & j & = 2 , i = 0, 1, 3 \\
+              + &  f(x_3) \frac{(x^* - x_0) (x^* - x_1) (x^* - x_2)}{(x_3 - x_0) (x_3 - x_1) (x_3 - x_2)} & j & = 3 , i = 0, 1, 2 \\
+    \end{aligned}
+  \]
+
+  \[
+    \begin{aligned}
+      f(3) = & f(0) \frac{(3 - 1) (3 - 2) (3 - 4)}{(0 - 1) (0 - 2) (0 - 4)}  \\
+              + &  f(1) \frac{(3 - 0) (3 - 2) (3 - 4)}{(1 - 0) (1 - 2) (1 - 4)}  \\
+              + &  f(2) \frac{(3 - 0) (3 - 1) (3 - 4)}{(2 - 0) (2 - 1) (2 - 4)}  \\
+              + &  f(4) \frac{(3 - 0) (3 - 1) (3 - 2)}{(4 - 0) (4 - 1) (4 - 2)} \\
+    \end{aligned}
+  \]
+  \[
+    f(3) = 1 \times \frac{-2}{-8} + 1 \times \frac{-3}{3} + 2 \times \frac{-6}{-4} + 5 \times \frac{6}{24} = 3 \Rightarrow f(3) = 3
+  \]
+
+  \[
+    \begin{aligned}
+      f(5) = & f(0) \frac{(5 - 1) (5 - 2) (5 - 4)}{(0 - 1) (0 - 2) (0 - 4)}  \\
+              + &  f(1) \frac{(5 - 0) (5 - 2) (5 - 4)}{(1 - 0) (1 - 2) (1 - 4)}  \\
+              + &  f(2) \frac{(5 - 0) (5 - 1) (5 - 4)}{(2 - 0) (2 - 1) (2 - 4)}  \\
+              + &  f(4) \frac{(5 - 0) (5 - 1) (5 - 2)}{(4 - 0) (4 - 1) (4 - 2)} \\
+    \end{aligned}
+  \]
+  \[
+    f(5) = 1 \times \frac{12}{-8} + 1 \times \frac{15}{3} + 2 \times \frac{20}{-4} + 5 \times \frac{60}{24} = 6 \Rightarrow f(5) = 6
+  \]
+
+  \paragraph{Inverse Lagrang:} used to find $x$ from $y^*$ as follows \par
+  \[
+    x^* = \sum_{j=0}^{n} x_j \prod_{\substack{i = 0 \\ i \neq j}}^{n}
+  \]
+  Lets say $n = 2$ 
+  \[
+    x_* = x_0 \frac{(y^* - y_1) (y^* - y_2)}{(y_0 - y_1) (y_0 - y_2)} 
+        + x_1 \frac{(y^* - y_0) (y^* - y_2)}{(y_1 - y_0) (y_1 - y_2)} 
+        + x_2 \frac{(y^* - y_0) (y^* - y_1)}{(y_2 - y_0) (y_2 - y_1)}
+  \]
+  \textbf{EX:} Find the value of $x^*$ when $y^* = 0.2703$ for the following data \par
+  \medskip
+  \noindent
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    $x$ & $1.6$ & $2.9$ & $4.8$ \\ \hline
+    $y$ & $0.625$ & $0.3448$ & $0.2083$ \\ 
+    \hline
+  \end{tabular}
+
+  \medskip
+  \noindent
+  \textbf{Sol:}
+  \[
+    x^* = \sum_{j=0}^{n} x_j \prod_{\substack{i = 0 \\ i \neq j}}^{n}
+  \]
+  $n = 2$ 
+  \[
+    x_* = x_0 \frac{(y^* - y_1) (y^* - y_2)}{(y_0 - y_1) (y_0 - y_2)} 
+        + x_1 \frac{(y^* - y_0) (y^* - y_2)}{(y_1 - y_0) (y_1 - y_2)} 
+        + x_2 \frac{(y^* - y_0) (y^* - y_1)}{(y_2 - y_0) (y_2 - y_1)}
+  \]
+  \[
+    \begin{aligned}
+      x_* = & 1.6 \frac{(0.2703 - 0.3448) (0.2703 - 0.2083)}{(0.625 - 0.3448) (0.625 - 0.2083)} \\
+          + & 2.9 \frac{(0.2703 - 0.625) (0.2703 - 0.2083)}{(0.3448 - 0.625) (0.3448 - 0.2083)} \\
+          + & 4.8 \frac{(0.2703 - 0.625) (0.2703 - 0.3448)}{(0.2083 - 0.625) (0.2083 - 0.3448)}
+    \end{aligned}
+  \]
+  \[
+    x_* = 1.6 \frac{-0.004619}{0.11675934} + 2.9 \frac{-0.0219914}{-0.0382473} + 4.8 \frac{0.02642515}{0.05687955} \Rightarrow x^* = 3.834131631
+  \]
 \end{document}
